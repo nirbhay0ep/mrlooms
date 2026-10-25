@@ -1,0 +1,39 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // Valid Cloudflare Worker name (lowercase + dashes). Your site will be
+  // served at https://weavelink-india.<your-subdomain>.workers.dev
+  "name": "weavelink-india",
+
+  // TanStack Start SSR bundle emitted by `vite build` (export default { fetch })
+  "main": "dist/server/server.js",
+  "compatibility_date": "2025-05-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "observability": { "enabled": true },
+
+  // Static files in dist/client are served first; every other path (including "/")
+  // falls through to the SSR Worker. Do NOT set run_worker_first: true.
+  "assets": {
+    "directory": "./dist/client",
+    "binding": "ASSETS",
+    "not_found_handling": "none"
+  },
+
+  "vars": { "HF_ENV": "prod", "APP_SLUG": "weavelink-india" },
+
+  // app.manifest.json has "db": true and "r2": true, so the app expects
+  // env.DB and env.STORAGE. Replace database_id with the id printed by:
+  //   bunx wrangler d1 create weavelink-india-db
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "weavelink-india-db",
+      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID",
+      "migrations_dir": "migrations"
+    }
+  ],
+
+  // Create with: bunx wrangler r2 bucket create weavelink-india-assets
+  "r2_buckets": [{ "binding": "STORAGE", "bucket_name": "weavelink-india-assets" }]
+}

@@ -1,0 +1,26 @@
+{
+  "navy": {
+    "width": 640,
+    "height": 1123
+  },
+  "swatches": {
+    "width": 926,
+    "height": 1389
+  },
+  "checks": {
+    "width": 707,
+    "height": 1257
+  },
+  "prints": {
+    "width": 794,
+    "height": 1292
+  },
+  "earth": {
+    "width": 400,
+    "height": 600
+  },
+  "rolls": {
+    "width": 736,
+    "height": 981
+  }
+}

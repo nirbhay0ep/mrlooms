@@ -1,0 +1,11 @@
+import {siteFontsStylesheet} from '@/lib/fonts';
+import {ErrorView} from '@/components/market/error-view';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Outlet,createRootRouteWithContext,HeadContent,Scripts } from '@tanstack/react-router';
+import { useEffect,type ReactNode } from 'react';
+import appCss from '../styles.css?url';
+import meta from '../app-meta.json';
+declare const __HF_DESIGN_INSPECTOR__:boolean;
+export const Route=createRootRouteWithContext<{queryClient:QueryClient}>()({head:()=>({meta:[{charSet:'utf-8'},{name:'viewport',content:'width=device-width, initial-scale=1'},{title:meta.og_title},{name:'description',content:meta.og_description},{name:'theme-color',content:meta.theme_color},{property:'og:title',content:meta.og_title},{property:'og:description',content:meta.og_description},{property:'og:image',content:meta.og_image_url},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary_large_image'},{name:'twitter:title',content:meta.og_title},{name:'twitter:description',content:meta.og_description},{name:'twitter:image',content:meta.og_image_url},{property:'og:url',content:'https://weavelink-india.higgsfield.app/'},{property:'og:site_name',content:'WeaveLink India'}],links:[{rel:'stylesheet',href:appCss},{rel:'preload',href:'/assets/fonts/inter-latin.woff2',as:'font',type:'font/woff2',crossOrigin:'anonymous'},{rel:'stylesheet',href:siteFontsStylesheet},{rel:'icon',type:'image/svg+xml',href:'/assets/mark.svg'},{rel:'icon',href:'/favicon.ico'},{rel:'icon',type:'image/png',sizes:'32x32',href:'/favicon-32.png'},{rel:'icon',type:'image/png',sizes:'16x16',href:'/favicon-16.png'},{rel:'apple-touch-icon',href:'/apple-touch-icon.png'},{rel:'manifest',href:'/site.webmanifest'}]}),shellComponent:Shell,component:Root,notFoundComponent:()=> <ErrorView missing/>,errorComponent:({reset})=><ErrorView reset={reset}/>});
+function Shell({children}:{children:ReactNode}){return <html lang="en"><head><HeadContent/></head><body>{children}<Scripts/></body></html>}
+function Root(){const {queryClient}=Route.useRouteContext();useEffect(()=>{if(__HF_DESIGN_INSPECTOR__)void import('../module/design-inspector/runtime').then(m=>m.installHiggsfieldDesignInspector()).catch(()=>{});},[]);return <QueryClientProvider client={queryClient}><Outlet/></QueryClientProvider>}
